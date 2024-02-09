@@ -4,6 +4,7 @@ import { Movie } from "../Modals/MovieModal";
 import { TvShow } from "../Modals/TvShowModal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import HomeCard from "./HomeCard";
+import { shuffleArray } from "../../contexts/ShuffleArray";
 
 // interface HomeListProps {
 //   genreId: any;
@@ -28,8 +29,10 @@ function HomeList({ genreId }: { genreId: any }) {
         const movies = await fetchMoviesByGenre(genreId);
         const tvShows = await fetchTvShowsByGenre(genreId);
         const allResults = [...movies, ...tvShows];
+        const shuffledResults = shuffleArray(allResults);
+
         // console.log(allResults);
-        setAllItemsByGenre(allResults);
+        setAllItemsByGenre(shuffledResults);
       } else {
         setAllItemsByGenre([]);
       }

@@ -1,23 +1,45 @@
 import { useEffect, useRef, useState } from "react";
-import { MoviesData } from "../../../../data/MoviesData";
 import MovieCard from "./MovieCard";
 import { Movie } from "../../../Modals/MovieModal";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { shuffleArray } from "../../../../contexts/ShuffleArray";
+import axios from "axios";
 
 function MovieList({ genreId }: { genreId: any }) {
-  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
+  const [allMoviesByGenre, setAllMoviesByGenre] = useState<Movie[]>([]);
   const elementRef = useRef<HTMLDivElement | null>(null); // Specify the type
+  const NifApiKey = "560092ab89064b4982288bf6673d7996";
+  const TMDbBaseUrl = "https://api.themoviedb.org/3";
 
   useEffect(() => {
-    getMoviesByGenreId();
-  }, []);
+    fetchMoviesByGenreId();
+  }, [genreId]);
 
-  const getMoviesByGenreId = () => {
-    const filteredMovies = MoviesData.filter((movie) =>
-      movie.genre_ids.includes(genreId)
-    );
-    setFilteredMovies(filteredMovies);
+  const fetchMoviesByGenreId = async () => {
+    try {
+      if (genreId) {
+        const response = await axios.get(
+          `${TMDbBaseUrl}/discover/movie?api_key=${NifApiKey}&with_genres=${genreId}`
+        );
+        const result = response.data.results;
+        const shuffledResults = shuffleArray(result);
+        setAllMoviesByGenre(shuffledResults);
+      } else {
+        setAllMoviesByGenre([]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  // const getMoviesByGenreId = () => {
+  //   const filteredMovies = MoviesData.filter((movie) =>
+  //     movie.genre_ids.includes(genreId)
+  //   );
+  //   const shuffledResults = shuffleArray(filteredMovies);
+
+  //   setFilteredMovies(shuffledResults);
+  // };
 
   const calculateScrollDistance = () => {
     const screenWidth = window.innerWidth;
@@ -61,7 +83,7 @@ function MovieList({ genreId }: { genreId: any }) {
         ref={elementRef}
         className="flex overflow-x-auto gap-8
         scrollbar-none scroll-smooth pt-5 px-3 pb-5">
-        {filteredMovies.map((item, index) => (
+        {allMoviesByGenre.map((item, index) => (
           <MovieCard key={item.id} movie={item} />
         ))}
       </div>

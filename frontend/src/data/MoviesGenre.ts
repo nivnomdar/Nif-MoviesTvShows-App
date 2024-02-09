@@ -59,22 +59,22 @@ const MoviesGenre = [
       "id": 10402,
       "name": "Music"
     },
-    // {
-    //   "id": 10752,
-    //   "name": "War"
-    // },
-    // {
-    //   "id": 99,
-    //   "name": "Documentary"
-    // },
-    // {
-    //   "id": 10770,
-    //   "name": "TV Movie"
-    // },
-    // {
-    //   "id": 37,
-    //   "name": "Western"
-    // },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    },
   ]
 
   export default {MoviesGenre};

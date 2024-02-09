@@ -7,6 +7,7 @@ import CategoriesCard from "./ShowCategories/CategoriesCard";
 import axios from "axios";
 import { TvShow } from "../../Modals/TvShowModal";
 import { Movie } from "../../Modals/MovieModal";
+import { shuffleArray } from "../../../contexts/ShuffleArray";
 
 function CategoryPlayer() {
   const params = useParams();
@@ -29,9 +30,11 @@ function CategoryPlayer() {
         const movies = await fetchMoviesByGenre(genreId);
         const tvShows = await fetchTvShowsByGenre(genreId);
         const allResults = [...movies, ...tvShows];
+        const shuffledResults = shuffleArray(allResults);
+
         // console.log("allResults -", allResults);
 
-        setAllResultsByGenre(allResults);
+        setAllResultsByGenre(shuffledResults);
       } else {
         setAllResultsByGenre([]);
       }

@@ -5,7 +5,7 @@ import { Sidebar } from "../../Layout/Sidebar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "../../Buttons/Buttons";
-import { Plus } from "lucide-react";
+import { MinusCircle, PlusCircle } from "lucide-react";
 import { FullMovieModel } from "../../Modals/FullMovieModel";
 
 interface Favorite {
@@ -106,14 +106,21 @@ export function MoviePlayer() {
               alt={thisMoviePlayer?.original_title}
             />
 
-            <Button
-              onClick={handleAddFavrotie}
-              className="flex items-center rounded-lg gap-4 p-3">
-              <Plus className="w-6 h-6" />
-              <div className="whitespace-nowrap overflow-hidden text-ellipsis">
-                {isFavorite ? "Remove from list" : "Add to list"}
-              </div>
-            </Button>
+            {isFavorite ? (
+              <Button
+                onClick={handleAddFavrotie}
+                className="flex items-center rounded-lg p-3">
+                <MinusCircle size={32} className="w-6 h-6" strokeWidth={1.75} />
+                <div className="whitespace-nowrap overflow-hidden text-ellipsis"></div>
+              </Button>
+            ) : (
+              <Button
+                onClick={handleAddFavrotie}
+                className="flex items-center rounded-lg p-3">
+                <PlusCircle size={32} className="w-6 h-6" />
+                <div className="whitespace-nowrap overflow-hidden text-ellipsis "></div>
+              </Button>
+            )}
 
             <div className="text-2xl font-bold text-white mb-2">
               {thisMoviePlayer?.original_title}

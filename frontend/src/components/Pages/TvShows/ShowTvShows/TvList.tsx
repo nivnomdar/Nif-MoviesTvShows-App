@@ -3,6 +3,7 @@ import { TvShow } from "../../../Modals/TvShowModal";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TvShowCard from "./TvShowCard";
 import axios from "axios";
+import { shuffleArray } from "../../../../contexts/ShuffleArray";
 
 function TvList({ genreId }: { genreId: any }) {
   const [allTvShowsByGenre, setAllTvShowsByGenre] = useState<TvShow[]>([]);
@@ -21,7 +22,9 @@ function TvList({ genreId }: { genreId: any }) {
           `${TMDbBaseUrl}/discover/tv?api_key=${NifApiKey}&with_genres=${genreId}`
         );
         // console.log("response", response);
-        setAllTvShowsByGenre(response.data.results);
+        const result = response.data.results;
+        const shuffledResults = shuffleArray(result);
+        setAllTvShowsByGenre(shuffledResults);
       } else {
         setAllTvShowsByGenre([]);
       }
