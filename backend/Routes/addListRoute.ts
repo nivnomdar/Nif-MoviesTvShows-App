@@ -6,7 +6,7 @@ const watchRoute = express.Router();
 watchRoute.get(
   "/myList",
   async (request: Request, response: Response, next: NextFunction) => {
-    console.log("in Games route");
+    // console.log("in mylist route");
     return response.status(200).json(await getAllList());
   }
 ); // http://localhost:4000/nifweb/api/v1/mylist
@@ -27,7 +27,7 @@ watchRoute.post(
   "/addToList",
   async (request: Request, response: Response, next: NextFunction) => {
     const newItem = request.body;
-    console.log(newItem);
+    // console.log(newItem);
 
     const result = await addToMyList(newItem);
     return response.status(201).json(`${result}`);
