@@ -32,15 +32,6 @@ function MovieList({ genreId }: { genreId: any }) {
     }
   };
 
-  // const getMoviesByGenreId = () => {
-  //   const filteredMovies = MoviesData.filter((movie) =>
-  //     movie.genre_ids.includes(genreId)
-  //   );
-  //   const shuffledResults = shuffleArray(filteredMovies);
-
-  //   setFilteredMovies(shuffledResults);
-  // };
-
   const calculateScrollDistance = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1100) {

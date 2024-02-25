@@ -13,7 +13,7 @@ function HomeCard({ item }: HomeCardProps) {
     <>
       <img
         src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-        className="w-[150px] md:w-[200px] rounded-lg
+        className="w-[150px] md:w-[160px] rounded-lg
         hover:border-[3px] border-blue-400 cursor-pointer
         hover:scale-110 transition-all duration-150 ease-in"
         onClick={() => {

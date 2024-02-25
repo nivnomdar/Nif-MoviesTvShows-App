@@ -56,7 +56,7 @@ function FavoriteList() {
   };
 
   return (
-    <div className="p-8 px-8 md:px-16">
+    <div className="p-4 px-8 md:px-16">
       <h2 className="text-[20px] text-white font-bold">Favorites</h2>
 
       <div className="relative">
@@ -71,7 +71,7 @@ function FavoriteList() {
         <div
           ref={elementRef}
           className="flex overflow-x-auto gap-8
-            scrollbar-none scroll-smooth pt-5 px-3 pb-5">
+        scrollbar-none scroll-smooth pt-5 px-3 pb-5">
           {Favorites.map((item, index) => (
             <FavoriteCard key={item.id} item={item} />
           ))}
